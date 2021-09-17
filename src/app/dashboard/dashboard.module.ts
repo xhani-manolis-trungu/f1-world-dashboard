@@ -5,13 +5,14 @@ import { DemoMaterialModule } from '../demo-material-module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutes } from './dashboard.routing';
-import { ResultsModule } from '../pages/round-results/results.module';
+import { GeneralTableModule } from '../shared/general-table/general-table.module';
 
 @NgModule({
   imports: [
     CommonModule,
     DemoMaterialModule,
     FlexLayoutModule,
+    GeneralTableModule,
     RouterModule.forChild(DashboardRoutes)
   ],
   declarations: [DashboardComponent]

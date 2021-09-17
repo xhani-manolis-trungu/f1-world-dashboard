@@ -22,7 +22,7 @@ export class SeasonsService {
     private config: Configuration
   ) { }
 
-  setSeason(newSeason: string) {
+  setSeason(newSeason: string): void {
     this.season.next(newSeason);
     this.config.season = newSeason;
   }
@@ -31,7 +31,7 @@ export class SeasonsService {
     return this.season.asObservable();
   }
 
-  get seasons() {
+  get seasons(): Observable<Season[]> {
     if (!this.seasonsCache$) {
       this.seasonsCache$ = this.loadSeasons();
     }
@@ -41,7 +41,7 @@ export class SeasonsService {
 
 
   private loadSeasons(): Observable<Season[]> {
-    console.log(`GET seasons`)
+    console.log(`GET seasons`);
     return this.http
       .get<ErgastResponse>(
         `${environment.apiUrl}seasons.json?limit=${environment.apiMaxPageLimit

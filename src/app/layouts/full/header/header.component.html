@@ -1,0 +1,28 @@
+<!-- ============================================================== -->
+<!-- Profile - style you can find in header.scss -->
+<!-- ============================================================== -->
+
+<div fxLayout="row" fxLayoutAlign="space-between center">
+  <div class="light-dark-side-placeholder m-r-20">
+    <mat-slide-toggle #lightDarkToggle class="toggle-light-dark-theme" (click)="doToggleLightDark(lightDarkToggle)">
+      <mat-icon>{{lightDarkToggleIcon}}</mat-icon>
+    </mat-slide-toggle>
+  </div>
+  <button [matMenuTriggerFor]="profile" mat-icon-button class="m-r-5"> <img src="assets/images/users/1.jpg" alt="user"
+      class="profile-pic"> </button>
+</div>
+
+<mat-menu #profile="matMenu" class="mymegamenu">
+  <button mat-menu-item>
+    <mat-icon>settings</mat-icon> Settings
+  </button>
+  <button mat-menu-item>
+    <mat-icon>account_box</mat-icon> Profile
+  </button>
+  <button mat-menu-item>
+    <mat-icon>notifications_off</mat-icon> Disable notifications
+  </button>
+  <button mat-menu-item>
+    <mat-icon>exit_to_app</mat-icon> Sign Out
+  </button>
+</mat-menu>

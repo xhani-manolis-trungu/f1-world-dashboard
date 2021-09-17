@@ -1,0 +1,6 @@
+<ng-select [items]="(seasons$ | async)" autofocus [(ngModel)]="selectedSeason" (change)="getValues()">
+</ng-select>
+
+<!-- <pre>
+  {{(seasons$ | async) | json}}
+</pre> -->

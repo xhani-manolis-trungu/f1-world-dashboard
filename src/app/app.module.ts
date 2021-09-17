@@ -17,6 +17,8 @@ import { DemoMaterialModule } from './demo-material-module';
 
 import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './shared/spinner.component';
+import { DropdownModule } from './@core/dropdown/dropdown.module';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 const config: ExtraOptions = {
   useHash: true,
@@ -38,6 +40,8 @@ const config: ExtraOptions = {
     FlexLayoutModule,
     HttpClientModule,
     SharedModule,
+    DropdownModule,
+    NgSelectModule,
     RouterModule.forRoot(AppRoutes, config)
   ],
   providers: [

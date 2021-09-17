@@ -1,1 +1,11 @@
-<p>results works!</p>
+<mat-card>
+  <mat-card-content>
+    <div class="d-flex flex-wrap">
+      <div>
+        <mat-card-title>Results Overview</mat-card-title>
+        <mat-card-subtitle>Ample Admin Vs Material Admin</mat-card-subtitle>
+      </div>
+    </div>
+  </mat-card-content>
+  Season data: {{(season | async) | json}}
+</mat-card>

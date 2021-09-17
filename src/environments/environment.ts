@@ -6,5 +6,5 @@
 export const environment = {
   production: false,
   apiUrl: 'https://ergast.com/api/f1/',
-  apiMaxPageLimit: '400',
+  apiMaxPageLimit: '1000',
 };

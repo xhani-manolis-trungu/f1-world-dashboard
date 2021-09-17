@@ -13,13 +13,20 @@ export const AppRoutes: Routes = [
         pathMatch: 'full'
       },
       {
-        path: '',
-        loadChildren:
-          () => import('./material-component/material.module').then(m => m.MaterialComponentsModule)
-      },
-      {
         path: 'dashboard',
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+      },
+      {
+        path: 'results',
+        loadChildren: () => import('./pages/round-results/results.module').then(m => m.ResultsModule)
+      },
+      {
+        path: 'winners',
+        loadChildren: () => import('./pages/winners/winners.module').then(m => m.WinnersModule)
+      },
+      {
+        path: 'contact',
+        loadChildren: () => import('./pages/contact/contact.module').then(m => m.ContactModule)
       }
     ]
   }

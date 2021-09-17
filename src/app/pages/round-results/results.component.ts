@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Season } from 'src/app/domain/season';
+import { SeasonsService } from 'src/app/services/seasons.service';
 
 @Component({
   selector: 'app-results',
@@ -6,8 +9,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./results.component.css']
 })
 export class ResultsComponent implements OnInit {
+  @Input() season!: Observable<Season[]>;
 
-  constructor() { }
+  constructor(private seasonsService: SeasonsService) { }
 
   ngOnInit(): void {
   }

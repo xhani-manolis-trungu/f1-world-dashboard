@@ -10,11 +10,11 @@ import { SeasonsService } from '../services/seasons.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  season$!: Observable<string>
+  season$!: Observable<string>;
 
   constructor(private seasonService: SeasonsService) { }
 
   ngOnInit() {
-    this.season$ = this.seasonService.getSeason().pipe(distinctUntilChanged())
+    this.season$ = this.seasonService.getSeason().pipe(distinctUntilChanged());
   }
 }

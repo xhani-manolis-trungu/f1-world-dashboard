@@ -1,6 +1,6 @@
-import { Driver } from "./driver";
-import { Constructor } from "./constructor";
-import { Time } from "./time";
+import { Driver } from './driver';
+import { Constructor } from './constructor';
+import { Time } from './time';
 
 export class Result {
 

@@ -1,5 +1,5 @@
 export class Time {
 
-    millis: string = "";
-    time: string = "";
+    millis = '';
+    time = '';
 }

@@ -16,14 +16,14 @@ export class DropdownComponent implements OnInit {
   constructor(private seasonsService: SeasonsService) { }
 
   ngOnInit(): void {
-    this.seasonsService.setSeason(this.selectedSeason)
+    this.seasonsService.setSeason(this.selectedSeason);
 
-    this.seasons$ = this.seasonsService.seasons.pipe(map((res: Season[]) => res.map(item => item['season'])))
+    this.seasons$ = this.seasonsService.seasons.pipe(map((res: Season[]) => res.map(item => item.season)));
   }
 
   getValues() {
-    if (this.selectedSeason != null) this.seasonsService.setSeason(this.selectedSeason)
-    return
+    if (this.selectedSeason != null) { this.seasonsService.setSeason(this.selectedSeason); }
+    return;
   }
 
 }

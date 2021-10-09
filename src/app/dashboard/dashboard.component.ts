@@ -19,6 +19,8 @@ export class DashboardComponent implements OnInit {
   rounds$!: Observable<Race[]>
 
   allData$!: Observable<any[]>
+  data: any[] = [];
+  columns: string[] = ['Round', 'Circuit', 'Country']
 
   constructor(
     private seasonService: SeasonsService,
@@ -36,6 +38,10 @@ export class DashboardComponent implements OnInit {
         .pipe(map(seasons => seasons))
     ).pipe(
       scan((result, incoming) => {
+        this.data = [
+          { rounds: incoming },
+          { seasons: result }
+        ]
         return <Race[] & Season[]><unknown>[
           { rounds: incoming },
           { seasons: result }

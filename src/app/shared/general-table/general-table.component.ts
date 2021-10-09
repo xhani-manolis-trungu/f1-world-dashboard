@@ -10,7 +10,7 @@ import { TableBtn } from './interfaces/table-btn';
  */
 @Component({
   selector: 'general-table',
-  styleUrls: ['general-table.component.css'],
+  styleUrls: ['general-table.component.scss'],
   templateUrl: 'general-table.component.html',
 })
 export class GeneralTableComponent implements OnChanges {

@@ -1,0 +1,11 @@
+.alternate {
+  background-color: #afafaf !important;
+}
+
+.mat-row:hover {
+  background-color: #fbc12d9a;
+  transition-property: background-color, color;
+  transition-duration: 2s;
+  transition-timing-function: ease;
+  cursor: pointer;
+}

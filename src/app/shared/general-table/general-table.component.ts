@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ViewChild, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -22,9 +22,10 @@ export class GeneralTableComponent implements OnChanges {
   @Input() footer: string | null = null;
   @Input() pagination: number[] = [];
   @Input() pageSize!: number;
-  @Input() tableMinWidth: number = 500;
+  @Input() tableMinWidth: number = 100;
   @Output() filteredData = new EventEmitter<any[]>();
   @Output() buttonClick = new EventEmitter<string[]>();
+  @Output() rowClick = new EventEmitter<any>();
 
   dataSource!: MatTableDataSource<any>;
   displayedColumns!: string[];
@@ -55,6 +56,10 @@ export class GeneralTableComponent implements OnChanges {
     }
 
     this.dataSource.sort = this.sort;
+  }
+
+  getRow(row: any) {
+    this.rowClick.emit(row);
   }
 }
 

@@ -56,7 +56,7 @@ export class SeasonsService {
           tmp.push(currentSeason);
           return tmp;
         }),
-        shareReplay()
+        shareReplay(1)
       );
   }
 }

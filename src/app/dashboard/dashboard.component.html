@@ -1,44 +1,40 @@
 <!-- ============================================================== -->
-<!-- Simple four boxes Row -->
+<!-- Rounds and Drivers Standings for each round tables -->
 <!-- ============================================================== -->
 <div fxLayout="row wrap">
   <!-- column -->
-  <div fxFlex.gt-lg="100" fxFlex.gt-md="100" fxFlex.gt-xs="100" fxFlex="100">
+  <div fxFlex.gt-lg="65" fxFlex.gt-md="60" fxFlex.gt-xs="100" fxFlex="100">
 
     <mat-card>
       <mat-card-content>
-        <div class="d-flex flex-wrap">
-          <div>
-            <mat-card-title>Rounds Season {{(season$ | async)}}</mat-card-title>
-            <mat-card-subtitle>Ample Admin Vs Material Admin</mat-card-subtitle>
-          </div>
-          <!-- <div class="ml-auto">
-            <ul class="list-inline">
-              <li>
-                <h6 class="text-success m-0"><i class="mdi mdi-checkbox-blank-circle font-10 m-r-10 "></i>Ample</h6>
-              </li>
-              <li>
-                <h6 class=" text-info m-0"><i class="mdi mdi-checkbox-blank-circle font-10 m-r-10"></i>Pixel</h6>
-              </li>
-            </ul>
-          </div> -->
+        <div class="d-flex flex-wrap mb-3">
+          <mat-card-title>Rounds Season {{(season$ | async)}}</mat-card-title>
         </div>
 
-        <div class="d-flex flex-wrap">
-          <div>
-            <!-- <pre>{{(allData$ | async) | json}}</pre> -->
-            <general-table [columns]="columns" [data]="data">
-            </general-table>
-
-          </div>
-        </div>
+        <ng-container>
+          <general-table [columns]="roundsColumns" [data]="(rounds$ | async)" [pagination]="[2, 5, 25, 100]"
+            [pageSize]="10" (rowClick)="getDriverStandings($event)">
+          </general-table>
+        </ng-container>
       </mat-card-content>
     </mat-card>
   </div>
   <!-- column -->
   <!-- column -->
-  <div fxFlex.gt-lg="33" fxFlex.gt-md="33" fxFlex.gt-xs="100" fxFlex="100">
+  <div fxFlex.gt-lg="35" fxFlex.gt-md="40" fxFlex.gt-xs="100" fxFlex="100">
+    <mat-card>
+      <mat-card-content>
+        <div class="d-flex flex-wrap mb-3">
+          <mat-card-title>Driver Standings {{(season$ | async)}}</mat-card-title>
+        </div>
 
+        <ng-container>
+          <general-table [columns]="standingsColumns" [data]="(standingsTable$ | async)" [pagination]="[2, 5, 25, 100]"
+            [pageSize]="10">
+          </general-table>
+        </ng-container>
+      </mat-card-content>
+    </mat-card>
   </div>
   <!-- column -->
 </div>

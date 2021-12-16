@@ -32,6 +32,8 @@
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@ng-select/ng-select": "^7.2.0",
+    "@ngxs/logger-plugin": "^3.7.3-dev.master-6bd0acb",
+    "@ngxs/store": "^3.7.3-dev.master-6bd0acb",
     "chartist": "^0.11.4",
     "core-js": "^2.6.11",
     "hammerjs": "^2.0.8",

@@ -19,6 +19,9 @@ import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './shared/spinner.component';
 import { DropdownModule } from './@core/dropdown/dropdown.module';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { environment } from 'src/environments/environment';
+import { NgxsModule } from '@ngxs/store';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 
 const config: ExtraOptions = {
   useHash: true,
@@ -42,7 +45,14 @@ const config: ExtraOptions = {
     SharedModule,
     DropdownModule,
     NgSelectModule,
-    RouterModule.forRoot(AppRoutes, config)
+    RouterModule.forRoot(AppRoutes, config),
+    NgxsModule.forRoot([], {
+      developmentMode: !environment.production
+    }),
+    NgxsLoggerPluginModule.forRoot({
+      collapsed: true,
+      disabled: environment.production
+    })
   ],
   providers: [
     {

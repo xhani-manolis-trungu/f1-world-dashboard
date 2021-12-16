@@ -15,12 +15,16 @@ import { ErgastResponse } from '../domain/ergast/ergast-response';
 export class SeasonsService {
   private seasonsCache$!: Observable<Season[]>;
 
-  private season = new BehaviorSubject<string>('current');
+  private season = new BehaviorSubject<string>(this.getCurrentYear());
 
   constructor(
     private http: HttpClient,
     private config: Configuration
   ) { }
+
+  getCurrentYear(): string {
+    return new Date().getFullYear().toString()
+  }
 
   setSeason(newSeason: string): void {
     this.season.next(newSeason);
@@ -41,7 +45,6 @@ export class SeasonsService {
 
 
   private loadSeasons(): Observable<Season[]> {
-    console.log(`GET seasons`);
     return this.http
       .get<ErgastResponse>(
         `${environment.apiUrl}seasons.json?limit=${environment.apiMaxPageLimit
@@ -50,10 +53,10 @@ export class SeasonsService {
       .pipe(
         map(result => {
           const tmp: Season[] = result.MRData.SeasonTable.Seasons;
-          const currentSeason = new Season();
-          currentSeason.season = 'current';
-          currentSeason.url = '';
-          tmp.push(currentSeason);
+          // const currentSeason = new Season();
+          // currentSeason.season = this.getCurrentYear();
+          // currentSeason.url = '';
+          // tmp.push(currentSeason);
           return tmp;
         }),
         shareReplay(1)

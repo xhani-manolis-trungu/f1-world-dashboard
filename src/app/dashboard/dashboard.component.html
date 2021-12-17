@@ -4,37 +4,12 @@
 <div fxLayout="row wrap">
   <!-- column -->
   <div fxFlex.gt-lg="65" fxFlex.gt-md="60" fxFlex.gt-xs="100" fxFlex="100">
-
-    <mat-card>
-      <mat-card-content>
-        <div class="d-flex flex-wrap mb-3">
-          <mat-card-title>Rounds Season {{(season$ | async)}}</mat-card-title>
-        </div>
-
-        <ng-container>
-          <general-table [columns]="roundsColumns" [data]="(rounds$ | async)" [pagination]="[2, 5, 25, 100]"
-            [pageSize]="10" (rowClick)="getDriverStandings($event)">
-          </general-table>
-        </ng-container>
-      </mat-card-content>
-    </mat-card>
+    <app-season-rounds></app-season-rounds>
   </div>
   <!-- column -->
   <!-- column -->
   <div fxFlex.gt-lg="35" fxFlex.gt-md="40" fxFlex.gt-xs="100" fxFlex="100">
-    <mat-card>
-      <mat-card-content>
-        <div class="d-flex flex-wrap mb-3">
-          <mat-card-title>Driver Standings {{(season$ | async)}}</mat-card-title>
-        </div>
-
-        <ng-container>
-          <general-table [columns]="standingsColumns" [data]="(standingsTable$ | async)" [pagination]="[2, 5, 25, 100]"
-            [pageSize]="10">
-          </general-table>
-        </ng-container>
-      </mat-card-content>
-    </mat-card>
+    <app-driver-standings></app-driver-standings>
   </div>
   <!-- column -->
 </div>
@@ -56,8 +31,6 @@
   <!-- Card column -->
   <!-- Card column -->
   <div fxFlex.gt-lg="75" fxFlex.gt-md="60" fxFlex.gt-xs="100" fxFlex="100">
-
-
 
   </div>
 </div>

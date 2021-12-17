@@ -23,10 +23,6 @@ export const AppRoutes: Routes = [
       {
         path: 'winners',
         loadChildren: () => import('./pages/winners/winners.module').then(m => m.WinnersModule)
-      },
-      {
-        path: 'contact',
-        loadChildren: () => import('./pages/contact/contact.module').then(m => m.ContactModule)
       }
     ]
   }

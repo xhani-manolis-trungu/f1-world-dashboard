@@ -1,0 +1,13 @@
+<mat-card>
+  <mat-card-content>
+    <div class="d-flex flex-wrap mb-3">
+      <mat-card-title>Driver Standings {{(season$ | async)}}</mat-card-title>
+    </div>
+
+    <ng-container>
+      <general-table [columns]="standingsColumns" [data]="(standingsTable$ | async)" [pagination]="[2, 5, 25, 100]"
+        [pageSize]="10">
+      </general-table>
+    </ng-container>
+  </mat-card-content>
+</mat-card>

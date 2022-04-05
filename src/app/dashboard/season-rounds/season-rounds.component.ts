@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { DriverStanding } from '../../domain/driver-standing';
@@ -16,7 +16,7 @@ export type Round = Pick<Race, 'round'>;
   styleUrls: ['./season-rounds.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SeasonRoundsComponent implements OnInit, OnDestroy {
+export class SeasonRoundsComponent implements OnInit {
   season$!: Observable<string>;
   season!: string;
   seasonSubscription!: Subscription;
@@ -38,12 +38,9 @@ export class SeasonRoundsComponent implements OnInit, OnDestroy {
     this.rounds$ = this.roundsService.rounds
   }
 
-  ngOnDestroy() {
-    this.seasonSubscription?.unsubscribe();
-  }
-
   getDriverStandings(row: Round) {
-    this.seasonSubscription = this.seasonService.getSeason().subscribe(season => this.season = season);
+    // To implement with store action
+    this.seasonService.getSeason().subscribe(season => this.season = season);
 
     this.standingsTable$ = this.roundsService.loadStandingsTable(this.season, row.round)
       .pipe(

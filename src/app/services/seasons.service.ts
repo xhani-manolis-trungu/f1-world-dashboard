@@ -52,12 +52,8 @@ export class SeasonsService {
       )
       .pipe(
         map(result => {
-          const tmp: Season[] = result.MRData.SeasonTable.Seasons;
-          // const currentSeason = new Season();
-          // currentSeason.season = this.getCurrentYear();
-          // currentSeason.url = '';
-          // tmp.push(currentSeason);
-          return tmp;
+          const seasons: Season[] = result.MRData.SeasonTable.Seasons;
+          return seasons;
         }),
         shareReplay(1)
       );

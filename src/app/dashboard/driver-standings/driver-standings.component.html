@@ -5,8 +5,8 @@
     </div>
 
     <ng-container>
-      <general-table [columns]="standingsColumns" [data]="(standingsTable$ | async)" [pagination]="[2, 5, 25, 100]"
-        [pageSize]="10">
+      <general-table [columns]="standingsColumns" [data]="(driverStandings$ | async)" [pagination]="[2, 5, 25, 100]"
+        [pageSize]="10" (rowClick)="getDriverBio($event)">
       </general-table>
     </ng-container>
   </mat-card-content>

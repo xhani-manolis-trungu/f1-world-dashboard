@@ -1,16 +1,11 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, OnDestroy } from "@angular/core";
-import { pipe } from "rxjs";
-import { BehaviorSubject, Subscription } from "rxjs";
-import { Observable } from "rxjs";
-import { debounce, debounceTime, delay, distinctUntilChanged, map, mergeMap, shareReplay } from "rxjs/operators";
+import { BehaviorSubject, Observable } from "rxjs";
+import { debounceTime, distinctUntilChanged, map, mergeMap, shareReplay } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import { Configuration } from "../app.constants";
-import { Driver } from "../domain/driver";
-import { DriverStanding } from "../domain/driver-standing";
 import { ErgastResponse } from "../domain/ergast/ergast-response";
 import { Race } from "../domain/race";
-import { RaceTable } from "../domain/tables/race-table";
 import { StandingsTable } from "../domain/tables/standings-table";
 import { SeasonsService } from "./seasons.service";
 
@@ -35,9 +30,7 @@ export class RoundsService implements OnDestroy {
       .pipe(distinctUntilChanged())
   }
 
-  ngOnDestroy() {
-    // if (this.seasonsService$) this.seasonsService$.unsubscribe();
-  }
+  ngOnDestroy() {}
 
   setRound(race: string | number): void {
     this.round.next(race);

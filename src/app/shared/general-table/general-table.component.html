@@ -1,5 +1,5 @@
 <mat-form-field *ngIf="filter">
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{filterPlaceholder}}">
+  <input matInput (keyup)="applyFilter($event)" placeholder="{{filterPlaceholder}}">
 </mat-form-field>
 
 <div class="mat-elevation-z1 w-100 table-responsive">

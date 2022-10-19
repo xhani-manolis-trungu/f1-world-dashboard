@@ -5,6 +5,8 @@ import { FlexLayoutModule, FlexModule } from '@angular/flex-layout';
 import { GeneralTableComponent } from '../../shared/general-table/general-table.component';
 import { GeneralTableModule } from '../../shared/general-table/general-table.module';
 import { DemoMaterialModule } from '../../demo-material-module';
+import { NgxsModule } from '@ngxs/store';
+import { RoundsState } from '../season-rounds/season-rounds-state/season-rounds.state';
 
 
 
@@ -14,7 +16,7 @@ import { DemoMaterialModule } from '../../demo-material-module';
     CommonModule,
     DemoMaterialModule,
     FlexLayoutModule,
-    GeneralTableModule,
+    GeneralTableModule
   ],
   exports: [DriverStandingsComponent]
 })

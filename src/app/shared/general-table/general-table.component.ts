@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, ViewChild, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ViewChild, OnChanges, SimpleChanges, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -12,11 +12,12 @@ import { TableBtn } from './interfaces/table-btn';
   selector: 'general-table',
   styleUrls: ['general-table.component.scss'],
   templateUrl: 'general-table.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GeneralTableComponent implements OnChanges {
   @Input() columns: TableColumn[] = [];
   @Input() buttons: TableBtn[] = [];
-  @Input() data: any[] = [];
+  @Input() data: any | any[] | null = [];
   @Input() filter: boolean = false;
   @Input() filterPlaceholder: string = 'Filter';
   @Input() footer: string | null = null;
@@ -47,8 +48,8 @@ export class GeneralTableComponent implements OnChanges {
     }
   }
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  applyFilter(event: any) {
+    this.dataSource.filter = event.target?.value.trim().toLowerCase();
     this.filteredData.emit(this.dataSource.filteredData);
 
     if (this.dataSource.paginator) {

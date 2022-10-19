@@ -1,12 +1,14 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
 import { Observable, Subscription } from 'rxjs';
-import { distinctUntilChanged, map } from 'rxjs/operators';
-import { DriverStanding } from '../../domain/driver-standing';
+import { catchError, distinctUntilChanged, map, mergeMap } from 'rxjs/operators';
+import { AutoUnsubscribe } from 'src/app/@core/decorators';
+import { StandingsTable } from 'src/app/domain/tables/standings-table';
 import { Race } from '../../domain/race';
-import { StandingsTable } from '../../domain/tables/standings-table';
 import { RoundsService } from '../../services/rounds.service';
 import { SeasonsService } from '../../services/seasons.service';
 import { TableColumn } from '../../shared/general-table/interfaces';
+import { GetDriverStandings } from './season-rounds-state/season-rounds.actions';
 
 export type Round = Pick<Race, 'round'>;
 
@@ -23,9 +25,12 @@ export class SeasonRoundsComponent implements OnInit {
 
   rounds$!: Observable<Race[]>
   roundsColumns!: TableColumn[];
-  standingsTable$!: Observable<DriverStanding[]>;
+  standingsTable$!: Observable<StandingsTable>;
 
-  constructor(private roundsService: RoundsService, private seasonService: SeasonsService) {
+  constructor(
+    private roundsService: RoundsService,
+    private seasonService: SeasonsService,
+    private store: Store) {
     this.roundsColumns = [
       { columnDef: 'round', header: 'Round', cell: (element: Race) => `${element.round}` },
       { columnDef: 'circuit', header: 'Circuit', cell: (element: Race) => `${element.Circuit.circuitName}` },
@@ -34,20 +39,21 @@ export class SeasonRoundsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    AutoUnsubscribe()
     this.season$ = this.seasonService.getSeason().pipe(distinctUntilChanged());
     this.rounds$ = this.roundsService.rounds
   }
 
+  @AutoUnsubscribe()
   getDriverStandings(row: Round) {
-    // To implement with store action
-    this.seasonService.getSeason().subscribe(season => this.season = season);
-
-    this.standingsTable$ = this.roundsService.loadStandingsTable(this.season, row.round)
-      .pipe(
-        map((standingsTable: StandingsTable) => {
-          return standingsTable.StandingsLists[0].DriverStandings
-        })
-      )
+    return this.seasonService.getSeason().pipe(
+      map(season => season),
+      mergeMap((season) => {
+        console.log(season)
+        return this.store.dispatch(new GetDriverStandings(season, row.round))
+      }),
+      catchError((err) => err)
+    ).subscribe(() => { }, (err) => console.log(err))
   }
 
 }

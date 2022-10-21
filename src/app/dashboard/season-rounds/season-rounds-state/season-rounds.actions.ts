@@ -1,11 +1,5 @@
 export class GetRounds {
-  static readonly type = '[Season Rounds] Get';
+  static readonly type = '[Season Rounds] Get Season Rounds';
 
   constructor() { }
-}
-
-export class GetDriverStandings {
-  static readonly type = '[Season Rounds] Get Driver Standings';
-
-  constructor(public season: number | string, public round: number | string) {}
 }

@@ -1,13 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { AutoUnsubscribe } from 'src/app/@core/decorators';
-import { Driver } from 'src/app/domain/driver';
 import { DriverService } from 'src/app/services/driver.service';
 import { DriverStanding } from '../../domain/driver-standing';
 import { TableColumn } from '../../shared/general-table/interfaces';
-import { RoundsState } from '../season-rounds/season-rounds-state/season-rounds.state';
+import { GetDriverInfo } from '../driver-info/driver-info-state/driver-info.actions';
+import { DriverStandingsState } from './driver-standings-state/driver-standings.state';
 
 @Component({
   selector: 'app-driver-standings',
@@ -16,11 +15,13 @@ import { RoundsState } from '../season-rounds/season-rounds-state/season-rounds.
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DriverStandingsComponent implements OnInit {
-  @Select(RoundsState.driverStandings) driverStandings$!: Observable<DriverStanding[] | null>;
+  @Select(DriverStandingsState.driverStandings) driverStandings$!: Observable<DriverStanding[] | null>;
   season$!: Observable<string>;
   standingsColumns!: TableColumn[];
 
-  constructor(private driverService: DriverService) {
+  constructor(
+    private driverService: DriverService,
+    private store: Store) {
     this.standingsColumns = [
       { columnDef: 'pos', header: 'Position', cell: (element: DriverStanding) => `${element.position}` },
       { columnDef: 'driver', header: 'Driver', cell: (element: DriverStanding) => `${element.Driver.familyName}` },
@@ -37,7 +38,7 @@ export class DriverStandingsComponent implements OnInit {
     this.driverService.setDriver(row.Driver.familyName);
     return this.driverService.loadDriversBio()
     .subscribe(
-      (driverBio) => {console.log(driverBio) },
+      (driverBio) => this.store.dispatch(new GetDriverInfo(driverBio)),
       (err) => console.log(err)
     )
   }

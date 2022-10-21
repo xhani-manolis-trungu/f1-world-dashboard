@@ -4,6 +4,8 @@ import { SeasonRoundsComponent } from './season-rounds.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DemoMaterialModule } from '../../demo-material-module';
 import { GeneralTableModule } from '../../shared/general-table/general-table.module';
+import { RoundsState } from './season-rounds-state/season-rounds.state';
+import { NgxsModule } from '@ngxs/store';
 
 
 
@@ -14,6 +16,7 @@ import { GeneralTableModule } from '../../shared/general-table/general-table.mod
     DemoMaterialModule,
     FlexLayoutModule,
     GeneralTableModule,
+    NgxsModule.forFeature([RoundsState])
   ],
   exports: [SeasonRoundsComponent]
 })

@@ -10,6 +10,11 @@ import { DashboardRoutes } from './dashboard.routing';
 import { DriverStandingsModule } from './driver-standings/driver-standings.module';
 import { RoundsState } from './season-rounds/season-rounds-state/season-rounds.state';
 import { SeasonRoundsModule } from './season-rounds/season-rounds.module';
+import { DriverImageComponent } from './driver-image/driver-image.component';
+import { DriverImageModule } from './driver-image/driver-image.module';
+import { DriverStandingsState } from './driver-standings/driver-standings-state/driver-standings.state';
+import { DriverInfoComponent } from './driver-info/driver-info.component';
+import { DriverInfoModule } from './driver-info/driver-info.module';
 
 @NgModule({
   imports: [
@@ -20,7 +25,8 @@ import { SeasonRoundsModule } from './season-rounds/season-rounds.module';
     GeneralTableModule,
     SeasonRoundsModule,
     DriverStandingsModule,
-    NgxsModule.forFeature([RoundsState])
+    DriverImageModule,
+    DriverInfoModule
   ],
   declarations: [DashboardComponent]
 })

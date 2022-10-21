@@ -22,6 +22,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { environment } from 'src/environments/environment';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { CoreModule } from './@core/core.module';
 
 const config: ExtraOptions = {
   useHash: true,
@@ -45,6 +46,7 @@ const config: ExtraOptions = {
     SharedModule,
     DropdownModule,
     NgSelectModule,
+    CoreModule,
     RouterModule.forRoot(AppRoutes, config),
     NgxsModule.forRoot([], {
       developmentMode: !environment.production

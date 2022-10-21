@@ -1,6 +1,17 @@
 <!-- ============================================================== -->
 <!-- Rounds and Drivers Standings for each round tables -->
 <!-- ============================================================== -->
+<div class="content-container">
+  <button mat-raised-button (click)="localError()">
+    Local front end error
+  </button>
+  <button mat-raised-button (click)="failingRequest()">
+    Server request with error
+  </button>
+  <button mat-raised-button (click)="successfulRequest()">
+    Successful request showing loading spinner
+  </button>
+</div>
 <div fxLayout="row wrap">
   <!-- column -->
   <div fxFlex.gt-lg="65" fxFlex.gt-md="60" fxFlex.gt-xs="100" fxFlex="100">

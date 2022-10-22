@@ -1,2 +1,8 @@
 <p>driver-image works!</p>
-{{driverImage$ | async | json}}
+{{driverImageUrl$ | async | json}}
+
+<mat-card>
+  <div class="container">
+    <img [src]="driverImageUrl$ | async" alt="Driver image">
+  </div>
+</mat-card>

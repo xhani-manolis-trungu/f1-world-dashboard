@@ -9,7 +9,7 @@ import { DriverImageState } from './driver-image-state/driver-image.state';
   styleUrls: ['./driver-image.component.css']
 })
 export class DriverImageComponent implements OnInit {
-  @Select(DriverImageState.driverInfo) driverImage$!: Observable<string[]>;
+  @Select(DriverImageState.driverImageUrl) driverImageUrl$!: Observable<string[]>;
 
   constructor() { }
 

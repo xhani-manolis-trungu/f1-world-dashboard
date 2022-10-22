@@ -6,20 +6,18 @@ import { ErrorDialogService } from './errors/error-dialog.service';
 import { CommonModule } from '@angular/common';
 import { ErrorDialogComponent } from './errors/error-dialog/error-dialog/error-dialog.component';
 
-const SharedComponents = [ErrorDialogComponent];
-
 @NgModule({
   declarations: [
     AccordionAnchorDirective,
     AccordionLinkDirective,
     AccordionDirective,
-    SharedComponents
+    ErrorDialogComponent
   ],
   exports: [
     AccordionAnchorDirective,
     AccordionLinkDirective,
     AccordionDirective,
-    SharedComponents
+    ErrorDialogComponent
   ],
   imports: [CommonModule],
   providers: [MenuItems, ErrorDialogService]

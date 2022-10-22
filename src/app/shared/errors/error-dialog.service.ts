@@ -25,4 +25,8 @@ export class ErrorDialogService {
       });
     }
   }
+
+  closeDialog(): void {
+    this.dialog.closeAll()
+  }
 }

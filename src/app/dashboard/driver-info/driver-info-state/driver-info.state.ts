@@ -1,7 +1,9 @@
 import { Injectable } from "@angular/core";
-import { Action, Selector, State, StateContext } from "@ngxs/store";
+import { Action, Selector, State, StateContext, Store } from "@ngxs/store";
 import { Driver } from "src/app/domain/driver";
 import { RoundsService } from "src/app/services/rounds.service";
+import { urlSplitter } from "src/app/utils/urlSplitter";
+import { GetDriverImage } from "../../driver-image/driver-image-state/driver-image.actions";
 import { GetDriverInfo } from "./driver-info.actions";
 
 export class DriverInfoModel {
@@ -16,11 +18,14 @@ export class DriverInfoModel {
 })
 @Injectable()
 export class DriverInfoState {
-  constructor(private roundsService: RoundsService) {}
+  constructor(
+    private roundsService: RoundsService,
+    private store: Store
+  ) {}
 
   @Selector()
   static driverInfo(state: DriverInfoModel) {
-    return state;
+    return state.info;
   }
 
   @Action(GetDriverInfo)
@@ -28,6 +33,10 @@ export class DriverInfoState {
     { patchState }: StateContext<DriverInfoModel>,
     { driverInfo }: GetDriverInfo
   ) {
+    const driverName = urlSplitter(driverInfo[0].url);
+    this.store.dispatch(new GetDriverImage(driverName));
     patchState({ info: driverInfo });
   }
+
+
 }

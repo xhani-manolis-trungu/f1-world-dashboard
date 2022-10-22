@@ -35,14 +35,14 @@ export class DriverStandingsState {
       .pipe(
         map((standingsTable: StandingsTable) => {
           const driverStandings: DriverStanding[] = [
-            ...standingsTable.StandingsLists[0].DriverStandings,
+            ...standingsTable.StandingsLists[0].DriverStandings
           ];
           return driverStandings;
         })
       )
       .subscribe(
         (driverStandings) => {
-          patchState({ standings: driverStandings });
+          patchState({ standings: [...driverStandings] });
         },
         (error) => { console.log(error) }
       );

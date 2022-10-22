@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { DriverImageState } from './driver-image-state/driver-image.state';
 
 @Component({
   selector: 'app-driver-image',
@@ -6,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./driver-image.component.css']
 })
 export class DriverImageComponent implements OnInit {
+  @Select(DriverImageState.driverInfo) driverImage$!: Observable<string[]>;
 
   constructor() { }
 

@@ -1,21 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
+import { AutoUnsubscribe } from 'src/app/@core/decorators';
+import { Driver } from 'src/app/domain/driver';
+import { DriverInfoState } from '../driver-info/driver-info-state/driver-info.state';
 import { DriverImageState } from './driver-image-state/driver-image.state';
 
 @Component({
   selector: 'app-driver-image',
   templateUrl: './driver-image.component.html',
-  styleUrls: ['./driver-image.component.css']
+  styleUrls: ['./driver-image.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DriverImageComponent implements OnInit {
+  public url: string = '';
   @Select(DriverImageState.driverImageUrl) driverImageUrl$!: Observable<string[]>;
+  @Select(DriverInfoState.driverInfo) driverInfo$!: Observable<Driver[]>;
 
   constructor() { }
 
   ngOnInit(): void {
   }
-
-  // https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&piprop=original&titles=Charles_Leclerc
-  // To get the image of a driver you need to get the page id of the driver and then use that id to get the image url from the pageimages property
 }

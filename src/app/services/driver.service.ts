@@ -9,6 +9,7 @@ import { environment } from '../../environments/environment';
 import { Configuration } from '../app.constants';
 import { ErgastResponse } from '../domain/ergast/ergast-response';
 import { Driver } from '../domain/driver';
+import { DriverImage } from '../domain/driverImage';
 
 @Injectable({
   providedIn: 'root',
@@ -53,5 +54,19 @@ export class DriverService {
         }),
         shareReplay(1)
       );
+  }
+
+  getDriverImage(driverName: string) {
+    const url = `https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&titles=${driverName}&pithumbsize=500&format=json&formatversion=2&origin=*`
+
+      return this.http.get(url).pipe(
+        map((data: any) => {
+          const imageUrl = data.query.pages[0]?.thumbnail.source;
+          const imageHeight = data.query.pages[0]?.thumbnail.height;
+          const imageWidth = data.query.pages[0]?.thumbnail.width;
+          return {imageUrl, imageHeight, imageWidth} as DriverImage;
+        }),
+        shareReplay(1)
+      )
   }
 }

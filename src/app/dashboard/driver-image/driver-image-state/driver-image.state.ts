@@ -1,31 +1,39 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext, Store } from "@ngxs/store";
 import { Driver } from "src/app/domain/driver";
+import { DriverImage } from "src/app/domain/driverImage";
+import { DriverService } from "src/app/services/driver.service";
 import { RoundsService } from "src/app/services/rounds.service";
-import { GetDriverImage } from "./driver-image.actions";
+import { urlSplitter } from "src/app/utils/urlSplitter";
+import { GetDriverImage, SetDriverName } from "./driver-image.actions";
 
 export class DriverImageModel {
-  image!: string[];
+  name!: string | null;
   imageUrl!: string | null;
+  imageHeight!: number | null;
+  imageWidth!: number | null;
 }
 
 @State<DriverImageModel>({
   name: "driverImageState",
   defaults: {
-    image: [],
-    imageUrl: null
+    name: null,
+    imageUrl: null,
+    imageHeight: null,
+    imageWidth: null
   },
 })
 @Injectable()
 export class DriverImageState {
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private driverService: DriverService
   ) {}
 
   @Selector()
-  static driverImage(state: DriverImageModel) {
-    return state.image;
+  static driverName(state: DriverImageModel) {
+    return state.name;
   }
 
   @Selector()
@@ -33,24 +41,24 @@ export class DriverImageState {
     return state.imageUrl;
   }
 
-  @Action(GetDriverImage)
+  @Action(SetDriverName)
   getDriverInfo(
-    { patchState }: StateContext<DriverImageModel>,
-    { driverImage }: GetDriverImage
+    { patchState, dispatch, getState }: StateContext<DriverImageModel>,
+    { driverName }: SetDriverName
   ) {
-    // create proper url to get image from wikipedia
-
-    // const url = `https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&piprop=original&titles=${driverImage}`;
-    // const url = `https://en.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=pageimages|pageterms&piprop=thumbnail&pithumbsize=500&titles=Albert Einstein`
-    // this.http.get(url).subscribe((data: any) => {
-    //   const pageId = Object.keys(data.query.pages)[0];
-    //   const imageUrl = data.query.pages[pageId].original.source;
-
-    //   patchState({ imageUrl: imageUrl });
-    // })
+    dispatch(new GetDriverImage(driverName));
     patchState({
-      image: driverImage,
+      name: driverName,
     });
+  }
+
+  @Action(GetDriverImage)
+  getDriverImage(
+    { patchState, getState }: StateContext<DriverImageModel>,
+    { driverName }: GetDriverImage) {
+      this.driverService.getDriverImage(driverName).subscribe((imageData: DriverImage) => {
+        patchState({ imageUrl: imageData.imageUrl, imageHeight: imageData.imageHeight, imageWidth: imageData.imageWidth });
+      });
   }
 
 }

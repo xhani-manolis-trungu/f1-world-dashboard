@@ -57,10 +57,9 @@ export class RoundsService implements OnDestroy {
     return this.roundsCache$;
   }
 
-  loadStandingsTable(season: string | number, round: string | number): Observable<StandingsTable> {
-    return this.http.get<ErgastResponse>(
-      `${environment.apiUrl}${season}/${round}/driverStandings.json?limit=${environment.apiMaxPageLimit}`,
-    ).pipe(
+  loadStandingsTable(season: string | number, round?: string | number): Observable<StandingsTable> {
+    const url = !!round ? `${environment.apiUrl}${season}/${round}/driverStandings.json?limit=${environment.apiMaxPageLimit}` : `${environment.apiUrl}${season}/driverStandings.json?limit=${environment.apiMaxPageLimit}`;
+    return this.http.get<ErgastResponse>(url).pipe(
       map(result => {
         const standingsTable: StandingsTable = result.MRData.StandingsTable
         return standingsTable

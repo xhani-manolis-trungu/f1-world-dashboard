@@ -3,3 +3,9 @@ export class GetDriverStandings {
 
   constructor(public season: number | string, public round: number | string) {}
 }
+
+export class GetSeasonDriverStandings {
+  static readonly type = '[Season Driver Standings] Get Season Driver Standings';
+
+  constructor(public season: number | string) {}
+}

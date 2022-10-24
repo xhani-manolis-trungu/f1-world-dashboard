@@ -3,7 +3,7 @@ import { Action, Selector, State, StateContext, Store } from "@ngxs/store";
 import { Driver } from "src/app/domain/driver";
 import { RoundsService } from "src/app/services/rounds.service";
 import { urlSplitter } from "src/app/utils/urlSplitter";
-import { GetDriverImage } from "../../driver-image/driver-image-state/driver-image.actions";
+import { SetDriverName } from "../../driver-image/driver-image-state/driver-image.actions";
 import { GetDriverInfo } from "./driver-info.actions";
 
 export class DriverInfoModel {
@@ -34,9 +34,7 @@ export class DriverInfoState {
     { driverInfo }: GetDriverInfo
   ) {
     const driverName = urlSplitter(driverInfo[0].url);
-    this.store.dispatch(new GetDriverImage(driverName));
+    this.store.dispatch(new SetDriverName(driverName));
     patchState({ info: driverInfo });
   }
-
-
 }

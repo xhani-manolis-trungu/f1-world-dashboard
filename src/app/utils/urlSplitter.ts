@@ -1,6 +1,6 @@
-export const urlSplitter = (url$: string): string[] => {
+export const urlSplitter = (url$: string): string => {
   const url = url$.split('/');
 
-  const driverNamePart = url.splice(url.length -1, url.length)
+  const driverNamePart = url.splice(url.length -1, url.length).toString()
   return driverNamePart;
 }

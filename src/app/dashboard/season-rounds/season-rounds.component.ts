@@ -30,7 +30,6 @@ export class SeasonRoundsComponent implements OnInit {
   standingsTable$!: Observable<StandingsTable>;
 
   constructor(
-    private roundsService: RoundsService,
     private seasonService: SeasonsService,
     private store: Store) {
     this.roundsColumns = [
@@ -45,7 +44,6 @@ export class SeasonRoundsComponent implements OnInit {
 
     AutoUnsubscribe()
     this.season$ = this.seasonService.getSeason().pipe(distinctUntilChanged());
-    AutoUnsubscribe()
   }
 
   @AutoUnsubscribe()
@@ -53,7 +51,6 @@ export class SeasonRoundsComponent implements OnInit {
     return this.seasonService.getSeason().pipe(
       map(season => season),
       mergeMap((season) => {
-        console.log(season)
         return this.store.dispatch(new GetDriverStandings(season, row.round))
       }),
       catchError((err) => err)

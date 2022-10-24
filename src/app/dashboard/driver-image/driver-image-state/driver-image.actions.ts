@@ -1,7 +1,12 @@
-import { Driver } from "src/app/domain/driver";
+
+export class SetDriverName {
+  static readonly type = '[Driver Name] Set Driver Name';
+
+  constructor(public driverName: string) {}
+}
 
 export class GetDriverImage {
-  static readonly type = '[Driver Image] Get Driver Image';
+  static readonly type = `[Driver Image] Get Driver Image`;
 
-  constructor(public driverImage: string[]) {}
+  constructor(public driverName: string) {}
 }

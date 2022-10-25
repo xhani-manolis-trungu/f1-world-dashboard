@@ -1,25 +1,25 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { catchError, map, mergeMap, take } from 'rxjs/operators';
+import { map, mergeMap, catchError, take } from 'rxjs/operators';
 import { AutoUnsubscribe } from 'src/app/@core/decorators';
+import { DriverStanding } from 'src/app/domain/driver-standing';
 import { DriverService } from 'src/app/services/driver.service';
 import { SeasonsService } from 'src/app/services/seasons.service';
+import { TableColumn } from 'src/app/shared/general-table/interfaces';
 import { UrlSplitter } from 'src/app/utils/urlSplitter';
-import { DriverStanding } from '../../domain/driver-standing';
-import { TableColumn } from '../../shared/general-table/interfaces';
 import { GetDriverInfo } from '../driver-info/driver-info-state/driver-info.actions';
-import { GetSeasonDriverStandings } from './driver-standings-state/driver-standings.actions';
-import { DriverStandingsState } from './driver-standings-state/driver-standings.state';
+import { DriverStandingsState } from '../driver-standings/driver-standings-state/driver-standings.state';
+import { GetSeasonDriverStandings } from './round-driver-standings-state/round-driver-standings.actions';
+import { RoundDriverStandingsState } from './round-driver-standings-state/round-driver-standings.state';
 
 @Component({
-  selector: 'app-driver-standings',
-  templateUrl: './driver-standings.component.html',
-  styleUrls: ['./driver-standings.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-round-driver-standings',
+  templateUrl: './round-driver-standings.component.html',
+  styleUrls: ['./round-driver-standings.component.css']
 })
-export class DriverStandingsComponent implements OnInit {
-  @Select(DriverStandingsState.driverStandings) driverStandings$!: Observable<DriverStanding[] | null>;
+export class RoundDriverStandingsComponent implements OnInit {
+  @Select(RoundDriverStandingsState.roundDriverStandings) roundDriverStandings$!: Observable<DriverStanding[] | null>;
   season$!: Observable<string>;
   standingsColumns!: TableColumn[];
 
@@ -56,7 +56,7 @@ export class DriverStandingsComponent implements OnInit {
       .driverName;
 
     this.driverService.setDriver(driverName);
-    return this.driverService.loadDriversBio(driverName)
+    return this.driverService.loadDriversBio().pipe(take(1))
     .subscribe(
       (driverBio) => {
         this.store.dispatch(new GetDriverInfo(driverBio))
@@ -65,5 +65,4 @@ export class DriverStandingsComponent implements OnInit {
       (err) => console.log(err)
     )
   }
-
 }

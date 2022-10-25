@@ -1,11 +1,8 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Action, Selector, State, StateContext, Store } from "@ngxs/store";
-import { Driver } from "src/app/domain/driver";
+import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { DriverImage } from "src/app/domain/driverImage";
 import { DriverService } from "src/app/services/driver.service";
-import { RoundsService } from "src/app/services/rounds.service";
-import { urlSplitter } from "src/app/utils/urlSplitter";
 import { GetDriverImage, SetDriverName } from "./driver-image.actions";
 
 export class DriverImageModel {

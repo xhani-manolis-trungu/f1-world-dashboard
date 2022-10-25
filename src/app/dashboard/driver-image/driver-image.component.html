@@ -5,4 +5,8 @@
     <mat-card-subtitle>{{info?.code}}</mat-card-subtitle>
   </mat-card-header>
 
+  <div class="container">
+    <img [src]="driverImageUrl$ | async" alt="Driver image">
+  </div>
+
 </mat-card>

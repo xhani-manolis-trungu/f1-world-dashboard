@@ -1,14 +1,13 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable, Subscription } from 'rxjs';
-import { catchError, distinctUntilChanged, map, mergeMap } from 'rxjs/operators';
+import { catchError, distinctUntilChanged, map, mergeMap, take } from 'rxjs/operators';
 import { AutoUnsubscribe } from 'src/app/@core/decorators';
 import { StandingsTable } from 'src/app/domain/tables/standings-table';
 import { Race } from '../../domain/race';
-import { RoundsService } from '../../services/rounds.service';
 import { SeasonsService } from '../../services/seasons.service';
 import { TableColumn } from '../../shared/general-table/interfaces';
-import { GetDriverStandings } from '../driver-standings/driver-standings-state/driver-standings.actions';
+import { GetRoundDriverStandings } from '../round-driver-standings/round-driver-standings-state/round-driver-standings.actions';
 import { GetRounds } from './season-rounds-state/season-rounds.actions';
 import { RoundsState } from './season-rounds-state/season-rounds.state';
 
@@ -49,9 +48,10 @@ export class SeasonRoundsComponent implements OnInit {
   @AutoUnsubscribe()
   getDriverStandings(row: Round) {
     return this.seasonService.getSeason().pipe(
+      take(1),
       map(season => season),
       mergeMap((season) => {
-        return this.store.dispatch(new GetDriverStandings(season, row.round))
+        return this.store.dispatch(new GetRoundDriverStandings(season, row.round))
       }),
       catchError((err) => err)
     ).subscribe(() => { }, (err) => console.log(err))

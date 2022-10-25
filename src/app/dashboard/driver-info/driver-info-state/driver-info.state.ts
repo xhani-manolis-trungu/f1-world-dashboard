@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext, Store } from "@ngxs/store";
 import { Driver } from "src/app/domain/driver";
 import { RoundsService } from "src/app/services/rounds.service";
-import { urlSplitter } from "src/app/utils/urlSplitter";
+import { UrlSplitter } from "src/app/utils/urlSplitter";
 import { SetDriverName } from "../../driver-image/driver-image-state/driver-image.actions";
 import { GetDriverInfo } from "./driver-info.actions";
 
@@ -33,7 +33,8 @@ export class DriverInfoState {
     { patchState }: StateContext<DriverInfoModel>,
     { driverInfo }: GetDriverInfo
   ) {
-    const driverName = urlSplitter(driverInfo[0].url);
+
+    const driverName = new UrlSplitter().urlSplitter(driverInfo[0].url).driverName;
     this.store.dispatch(new SetDriverName(driverName));
     patchState({ info: driverInfo });
   }

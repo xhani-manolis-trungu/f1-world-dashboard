@@ -15,6 +15,7 @@ import { DriverImageModule } from './driver-image/driver-image.module';
 import { DriverStandingsState } from './driver-standings/driver-standings-state/driver-standings.state';
 import { DriverInfoComponent } from './driver-info/driver-info.component';
 import { DriverInfoModule } from './driver-info/driver-info.module';
+import { RoundDriverStandingsModule } from './round-driver-standings/round-driver-standings.module';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { DriverInfoModule } from './driver-info/driver-info.module';
     RouterModule.forChild(DashboardRoutes),
     GeneralTableModule,
     SeasonRoundsModule,
+    RoundDriverStandingsModule,
     DriverStandingsModule,
     DriverImageModule,
     DriverInfoModule

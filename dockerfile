@@ -1,23 +1,9 @@
-# Create image based on the official Node 10 image from dockerhub
 FROM node:latest
+WORKDIR /usr/src/app
+COPY package*.json ./
+COPY angular.json /usr/src/app/angular.json
+COPY tsconfig*.json ./
+COPY proxy.conf.json /usr/src/app/proxy.conf.json
 
-# Create a directory where our app will be placed
-RUN mkdir -p /app
-
-# Change directory so that our commands run inside this new directory
-WORKDIR /app
-
-# Copy dependency definitions
-COPY package*.json /app/
-
-# Install dependecies
-RUN npm ci
-
-# Get all the code needed to run the app
-COPY . /app/
-
-# Expose the port the app runs in
-EXPOSE 4200
-
-# Serve the app
-CMD ["npm", "start"]
+RUN npm install --force
+RUN npm install -g @angular/cli@14.2.6

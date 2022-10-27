@@ -28,7 +28,6 @@
             ],
             "styles": [
               "node_modules/chartist/dist/chartist.css",
-              "src/styles.css",
               "src/assets/styles/style.scss",
               "node_modules/@fortawesome/fontawesome-free/css/all.css"
             ],
@@ -92,7 +91,7 @@
               "node_modules/jquery/dist/jquery.min.js"
             ],
             "styles": [
-              "src/styles.css",
+              "src/assets/styles/style.scss",
               "src/assets/styles/style.scss"
             ],
             "assets": [

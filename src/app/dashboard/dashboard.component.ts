@@ -10,6 +10,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 export class DashboardComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
+  is = true;
+
   ngOnInit() { }
 
   localError() {

@@ -1,19 +1,26 @@
 <!-- ============================================================== -->
 <!-- Rounds and Drivers Standings for each round tables -->
 <!-- ============================================================== -->
-<div fxLayout="row wrap">
+<div fxLayout="row wrap reverse">
   <!-- column -->
-  <div fxFlex.gt-lg="25" fxFlex.gt-md="35" fxFlex.gt-xs="100" fxFlex="100">
-    <app-driver-standings></app-driver-standings>
-  </div>
+  <ng-container>
+    <div fxFlex.gt-lg="25" fxFlex.gt-md="35" fxFlex.gt-xs="50" fxFlex="100">
+      <app-driver-standings></app-driver-standings>
+    </div>
+    <div fxFlex.gt-lg="25" fxFlex.gt-md="30" fxFlex.gt-xs="50" fxFlex="100">
+      <app-driver-image></app-driver-image>
+    </div>
+  </ng-container>
   <!-- column -->
-  <div fxFlex.gt-lg="45" fxFlex.gt-md="35" fxFlex.gt-xs="100" fxFlex="100">
-    <app-season-rounds></app-season-rounds>
-  </div>
+  <ng-container>
+    <div fxFlex.gt-lg="50" fxFlex.gt-md="100" fxFlex.gt-xs="100" fxFlex="100">
+      <app-season-rounds></app-season-rounds>
+    </div>
+  </ng-container>
   <!-- column -->
-  <div fxFlex.gt-lg="25" fxFlex.gt-md="25" fxFlex.gt-xs="100" fxFlex="100">
-    <app-driver-image></app-driver-image>
-  </div>
+  <ng-container>
+
+  </ng-container>
   <!-- column -->
 </div>
 

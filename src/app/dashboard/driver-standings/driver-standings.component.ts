@@ -19,7 +19,7 @@ import { DriverStandingsState } from './driver-standings-state/driver-standings.
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DriverStandingsComponent implements OnInit {
-  @Select(DriverStandingsState.driverStandings) driverStandings$!: Observable<DriverStanding[] | null>;
+  @Select(DriverStandingsState.driverStandings) driverStandings$!: Observable<DriverStanding[]>;
   season$!: Observable<string>;
   standingsColumns!: TableColumn[];
 
@@ -49,13 +49,9 @@ export class DriverStandingsComponent implements OnInit {
   @AutoUnsubscribe()
   getDriverBio(row: DriverStanding) {
 
-    const driverName = new UrlSplitter()
-      .setDriverName(row.Driver.familyName)
-      .addNameForDriversWithSameLastname(row.Driver.givenName)
-      .normalizeNameSpaces()
-      .driverName;
-
+    const driverName = this.getDriverName(row);
     this.driverService.setDriver(driverName);
+
     return this.driverService.loadDriversBio(driverName)
     .subscribe(
       (driverBio) => {
@@ -64,6 +60,16 @@ export class DriverStandingsComponent implements OnInit {
       },
       (err) => console.log(err)
     )
+  }
+
+  getDriverName(row: DriverStanding): string {
+    const driverName = new UrlSplitter()
+    .setDriverName(row.Driver.familyName)
+    .addNameForDriversWithSameLastname(row.Driver.givenName)
+    .normalizeNameSpaces()
+    .driverName;
+
+    return driverName;
   }
 
 }

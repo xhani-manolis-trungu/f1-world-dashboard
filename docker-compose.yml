@@ -5,14 +5,6 @@ x-config:
 version: '3.7'
 
 services:
-  # build a node server image to run our code on (docker-compose build node)
-  # node:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   image: *NODE_BUILDER
-  #   container_name: *BUILDER_CONTAINER_NAME
-  # mount current src files and run on node builder (docker-compose up dev)
   dev:
     build:
       context: .
@@ -24,4 +16,4 @@ services:
     volumes:
       - ./src:/usr/src/app/src
       - usr/src/app/node_modules
-    command: ng serve --host 0.0.0.0 --poll 1
+    command: ng serve --host 0.0.0.0 --poll 500

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { catchError, map, mergeMap, take } from 'rxjs/operators';
@@ -19,6 +19,8 @@ import { DriverStandingsState } from './driver-standings-state/driver-standings.
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DriverStandingsComponent implements OnInit {
+  @Input() season!: string;
+
   @Select(DriverStandingsState.driverStandings) driverStandings$!: Observable<DriverStanding[]>;
   season$!: Observable<string>;
   standingsColumns!: TableColumn[];
@@ -53,21 +55,21 @@ export class DriverStandingsComponent implements OnInit {
     this.driverService.setDriver(driverName);
 
     return this.driverService.loadDriversBio(driverName)
-    .subscribe(
-      (driverBio) => {
-        this.store.dispatch(new GetDriverInfo(driverBio))
+      .subscribe(
+        (driverBio) => {
+          this.store.dispatch(new GetDriverInfo(driverBio))
 
-      },
-      (err) => console.log(err)
-    )
+        },
+        (err) => console.log(err)
+      )
   }
 
   getDriverName(row: DriverStanding): string {
     const driverName = new UrlSplitter()
-    .setDriverName(row.Driver.familyName)
-    .addNameForDriversWithSameLastname(row.Driver.givenName)
-    .normalizeNameSpaces()
-    .driverName;
+      .setDriverName(row.Driver.familyName)
+      .addNameForDriversWithSameLastname(row.Driver.givenName)
+      .normalizeNameSpaces()
+      .driverName;
 
     return driverName;
   }

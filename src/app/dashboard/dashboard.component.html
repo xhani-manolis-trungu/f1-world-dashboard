@@ -5,7 +5,7 @@
   <!-- column -->
   <ng-container>
     <div fxFlex.gt-lg="25" fxFlex.gt-md="35" fxFlex.gt-xs="50" fxFlex="100">
-      <app-driver-standings></app-driver-standings>
+      <app-driver-standings [season]="(season$ | async)"></app-driver-standings>
     </div>
     <div fxFlex.gt-lg="25" fxFlex.gt-md="30" fxFlex.gt-xs="50" fxFlex="100">
       <app-driver-image></app-driver-image>

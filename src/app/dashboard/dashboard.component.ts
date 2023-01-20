@@ -1,5 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { SeasonsService } from '../services/seasons.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,11 +11,18 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent implements OnInit {
-  constructor(private http: HttpClient) { }
+  season$!: Observable<string>;
+
+  constructor(
+    private http: HttpClient,
+    private seansonService: SeasonsService
+  ) { }
 
   is = true;
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.season$ = this.seansonService.getSeason().pipe(take(1))
+  }
 
   localError() {
     throw Error('The app component has thrown an error!');
